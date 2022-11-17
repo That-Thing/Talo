@@ -1,0 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300&display=swap');
+body {
+    font-family: 'Noto Sans', sans-serif;
+}
+.bg-dark {
+    background-color: #212121!important;
+}
+.text-bg-dark {
+    color: #d3d6db!important;
+}
+#name {
+    font-family: 'Courier New', Courier, monospace
+}

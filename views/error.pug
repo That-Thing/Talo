@@ -1,0 +1,9 @@
+html 
+    head 
+        title Error
+        include includes/head.pug
+    body 
+        h1 Error
+        p #{message}
+        p #{error.status}
+        p #{error.stack}

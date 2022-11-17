@@ -1,0 +1,26 @@
+html 
+    head
+        title config.branding.title
+        include includes/head.pug
+        link(rel="stylesheet" href="/css/terminal.css")
+        script(src="/js/terminal.js")
+    body(class="d-flex text-bg-dark bg-dark")
+        div(class="cover-container d-flex flex-column p-2 mx-auto mt-3 w-75")
+            main 
+                img(class="img-fluid mx-auto d-block" src="/images/logo.png" alt="Logo")
+                div(id="name" class="text-center mt-3")
+            div(class="container d-flex mt-5")
+                div(class="card bg-dark w-100" id="terminal")
+                    div(class="card-body p-3 pb-0 d-flex flex-column overflow-auto" id="terminal-body")
+                        div(id="display" class="overflow-auto d-flex flex-column w-100 terminal-text-light")
+                            span(class="terminal-line") Welcome to the terminal.
+                            span(class="terminal-line") Type "help" to get started.
+                        div(class="input-group bg-dark w-100 mt-auto")
+                            span(id="gt" class="my-auto") >
+                            input(id="terminal-input" type="text" class="form-control bg-dark text-bg-dark pe-0" aria-label="Default" aria-describedby="inputGroup-sizing-default")
+
+                
+        footer
+            include includes/footer.pug
+            script(src="https://unpkg.com/typewriter-effect@2.3.1/dist/core.js")
+            script(src="/js/index.js")

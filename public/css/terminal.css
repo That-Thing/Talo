@@ -1,0 +1,29 @@
+#terminal {
+    height: 500px;
+}
+#terminal ::-webkit-scrollbar {
+    width: 8px;
+}
+#terminal ::-webkit-scrollbar-thumb {
+    background: #1b1b1b;
+    border-radius: 50px;
+}
+#terminal ::-webkit-scrollbar-thumb:hover {
+    background: #1b1b1beb;
+}
+#terminal ::-webkit-scrollbar-track {
+    background: transparent;
+}
+#terminal-input {
+    border: none;
+    box-shadow: none;
+}
+#gt {
+    font-size: 1rem;
+}
+.terminal-line {
+
+}
+.terminal-text-light {
+    color: #a2a5aa!important;
+}
