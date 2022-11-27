@@ -1,3 +1,6 @@
+var files = {
+    "about.txt": "/static/about.txt"
+}
 $(function() {
     $('#terminal-input').keypress(function(e){
         if(e.which == 13) {
@@ -36,9 +39,9 @@ function handleInput(input) {
 function help() {
     commands = {
         'clear': 'Clears the terminal',
-        'echo': 'Prints the arguments [Usage: echo {text}]',
+        'echo': 'Prints the arguments [Usage: echo &lt;text&gt;]',
         'ls': 'Lists the files in the current directory',
-        'cat': 'Prints the contents of a file [Usage: {file} ]',
+        'cat': 'Prints the contents of a file [Usage: cat &lt;file&gt; ]',
         'help': 'Prints this help message'
     }
     for(command in commands) {
@@ -58,8 +61,25 @@ function echo(args) {
     }
 }
 function ls() {
-    // Do stuff with ls
+    for(file in files) {
+        newLine(file);
+    }
 }
-function cat() {
-    // Do stuff with cat
+function cat(args) {
+    if(!args) {
+        newLine('cat: missing argument(s)');
+    } else {
+        var file = args[0];
+        if(files[file]) {
+            $.get(files[file], function(data) {
+                let lines = data.split("\n");
+                console.log(lines);
+                for(let i = 0; i < lines.length; i++) {
+                    newLine(lines[i]);
+                }
+            });
+        } else {
+            newLine('cat: ' + file + ': No such file or directory');
+        }
+    }
 }

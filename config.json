@@ -1,0 +1,10 @@
+{
+    "server": {
+        "port": 3000
+    },
+    "branding": {
+        "logo": "/images/logo.png",
+        "title": "Interesting Project",
+        "description": "Example description"
+    }
+}

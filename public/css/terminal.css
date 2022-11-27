@@ -1,5 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap');
 #terminal {
     height: 500px;
+    font-family: 'Source Code Pro', monospace;
 }
 #terminal ::-webkit-scrollbar {
     width: 8px;
@@ -22,7 +24,7 @@
     font-size: 1rem;
 }
 .terminal-line {
-
+    white-space: pre;
 }
 .terminal-text-light {
     color: #a2a5aa!important;
