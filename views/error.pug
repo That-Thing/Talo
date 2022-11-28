@@ -2,8 +2,12 @@ html
     head 
         title Error
         include includes/head.pug
-    body 
-        h1 Error
-        p #{message}
-        p #{error.status}
-        p #{error.stack}
+    body(class="bg-dark text-light")
+        div(class="container mt-5")
+            div(class="row")
+                div(class="col-md-12")
+                    div(class="card bg-dark")
+                        h1(class="card-header") Error #{error.status}
+                        div(class="card-body")
+                            p #{message}
+                            pre #{error.stack}
