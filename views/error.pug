@@ -10,4 +10,5 @@ html
                         h1(class="card-header") Error #{error.status}
                         div(class="card-body")
                             p #{message}
-                            pre #{error.stack}
+                            if config.server.dev == true
+                                pre #{error.stack}
