@@ -8,6 +8,10 @@
         "invalidUsernameLength": "Invalid username length",
         "invalidEmailLength": "Invalid email length",
         "invalidUsernameCharacters": "Invalid username characters",
-        "invalidEmailCharacters": "Invalid email characters" 
+        "invalidEmailCharacters": "Invalid email characters",
+        "invalidInvite": "Invalid invite",
+        "registrationDisabled": "Registration is disabled",
+        "usernameTaken": "Username taken",
+        "emailTaken": "Email taken"
     }
 }

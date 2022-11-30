@@ -19,7 +19,8 @@
     "accounts": {
         "registration": {
             "enabled": true,
-            "emailVerification": true
+            "emailVerification": true,
+            "invites": false
         }
     }
 }
