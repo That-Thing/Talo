@@ -7,7 +7,7 @@ var app = express();
 const config = require('./modules/config');
 //Routers
 var indexRouter = require('./routes/index');
-
+var cmdRouter = require('./routes/cmd');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -20,6 +20,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
+app.use('/cmd', cmdRouter);
 
 
 // catch 404 and forward to error handler

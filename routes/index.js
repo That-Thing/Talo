@@ -5,5 +5,10 @@ const config = require('../modules/config');
 router.get('/', function(req, res, next) {
   res.render('index', {config: config});
 });
+router.get('/login', function(req, res, next) {
+  res.render('login', {config: config});
+  
+});
+
 
 module.exports = router;

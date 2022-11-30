@@ -12,3 +12,7 @@ html
                             p #{message}
                             if config.server.dev == true
                                 pre #{error.stack}
+                            if error.status != 404
+                                p(class="mt-3 text-center text-muted")
+                                    |Please contact the administrator at 
+                                    a(href="mailto:#{config.server.adminEmail}") #{config.server.adminEmail}

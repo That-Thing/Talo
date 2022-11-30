@@ -1,0 +1,23 @@
+html 
+    head
+        title #{config.branding.title}
+        include includes/head.pug
+    body(class="d-flex text-bg-dark bg-dark") 
+        div(class="cover-container d-flex flex-column p-2 mx-auto mt-3 w-75")
+            main 
+                img(class="img-fluid mx-auto d-block" src="/images/logo.png" alt=config.branding.title)
+                div(id="name" class="text-center mt-3") #{config.branding.title}
+            div(class="container d-flex mt-5")
+                div(class="card bg-dark mx-auto")
+                    h1(class="card-header") Log in 
+                    div(class="card-body")
+                        form(action="/login" method="post")
+                        div(class="mb-3")
+                                label(for="username" class="form-label") Username
+                                input(type="text" class="form-control" id="username" name="username" placeholder="Username")
+                        div(class="mb-3")
+                                label(for="password" class="form-label") Password
+                                input(type="password" class="form-control" id="password" name="password" placeholder="Password")
+                        button(type="submit" class="btn btn-primary") Log in
+        footer
+            include includes/footer.pug

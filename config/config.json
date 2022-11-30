@@ -1,0 +1,25 @@
+{
+    "server": {
+        "port": 3000,
+        "dev": true,
+        "adminEmail": "admin@localhost",
+        "salt": "changeme"
+    },
+    "database": {
+        "host": "localhost",
+        "port": 27017,
+        "name": "projectname"
+    },
+    "branding": {
+        "logo": "/images/logo.png",
+        "title": "Interesting Project",
+        "description": "Haud nomine tantum",
+        "contactEmail": "contact@localhost"
+    },
+    "accounts": {
+        "registration": {
+            "enabled": true,
+            "emailVerification": true
+        }
+    }
+}

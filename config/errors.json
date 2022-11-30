@@ -1,0 +1,13 @@
+{
+    "auth": {
+        "invalidUsername": "Invalid username",
+        "invalidPassword": "Invalid password",
+        "invalidEmail": "Invalid email",
+        "invalidPasswordConfirmation": "Passwords do not match",
+        "invalidPasswordLength": "Invalid password length",
+        "invalidUsernameLength": "Invalid username length",
+        "invalidEmailLength": "Invalid email length",
+        "invalidUsernameCharacters": "Invalid username characters",
+        "invalidEmailCharacters": "Invalid email characters" 
+    }
+}
