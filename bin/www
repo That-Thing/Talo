@@ -8,7 +8,7 @@ var app = require('../app');
 var debug = require('debug')('website:server');
 var http = require('http');
 const fs = require('fs'); //filesync
-let config = JSON.parse(fs.readFileSync('config.json'));
+let config = JSON.parse(fs.readFileSync('config/config.json'));
 /**
  * Get port from environment and store in Express.
  */
