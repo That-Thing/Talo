@@ -15,7 +15,6 @@ router.get('/register', function(req, res, next) {
     res.render('register', {config: config});
 });
 
-
 //Login request
 router.post('/login', body('username').not().isEmpty().trim().escape(), body('password').not().isEmpty().trim().escape(), function(req, res, next) {
     const errors = validationResult(req);
@@ -23,7 +22,7 @@ router.post('/login', body('username').not().isEmpty().trim().escape(), body('pa
         return res.status(400).json({ errors: errors.array() });
     }
     var username = req.body.username;
-    var password = crypto.createHash('sha256').update(req.body.password+config.server.salt).digest('base64'); 
+    var password = crypto.createHash('sha256').update(req.body.password+config.server.salt).digest('base64');
     connection.query(`SELECT * FROM accounts WHERE username = '${username}'`, function (error, result) {
         if (error) throw error;
         if (result.length == 0) { //No account found

@@ -9,7 +9,7 @@
         "host": "localhost",
         "port": 27017,
         "name": "talo",
-        "username": "root",
+        "user": "root",
         "password": ""
     },
     "branding": {

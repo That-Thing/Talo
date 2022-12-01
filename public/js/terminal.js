@@ -83,3 +83,6 @@ function cat(args) {
         }
     }
 }
+function register() {
+    window.location.href = "/auth/register";
+}
