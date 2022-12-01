@@ -8,7 +8,9 @@
     "database": {
         "host": "localhost",
         "port": 27017,
-        "name": "projectname"
+        "name": "talo",
+        "username": "root",
+        "password": ""
     },
     "branding": {
         "logo": "/images/logo.png",
