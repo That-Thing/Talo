@@ -4,11 +4,28 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var app = express();
+const session = require('express-session');
 const config = require('./modules/config');
 //Routers
 var indexRouter = require('./routes/index');
 var cmdRouter = require('./routes/cmd');
 var authRouter = require('./routes/auth');
+
+// Initialize session
+app.use(session({
+	secret: config.server.salt,
+	resave: true,
+	saveUninitialized: true
+}));
+
+// Session middleware
+function setSession (req, res, next) { 
+  if (!req.session.loggedIn) {
+    req.session.loggedIn = false;
+  }
+  next();
+}
+app.use(setSession);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -20,6 +37,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+//Use routers
 app.use('/', indexRouter);
 app.use('/cmd', cmdRouter);
 app.use('/auth', authRouter);

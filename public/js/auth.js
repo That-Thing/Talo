@@ -11,7 +11,6 @@ $(function() {
                     window.location.href = "/auth/login";
                 }
             }).fail(function(data) {
-                console.log(data.responseJSON.status);
                 if(Array.isArray(data.responseJSON.status)) {
                     data.responseJSON.status.forEach(element => {
                         toastr.error(`${element.param}: ${element.msg}`, "Error");
@@ -24,29 +23,26 @@ $(function() {
         }
     });
     $('#login').click(function() {
-        login();
+        if(window.location.href.includes("/auth/login")) {
+            var username = $('#username').val();
+            var password = $('#password').val();
+            $.post('/auth/login', {username: username, password: password}, function(data) {
+            }).done(function(data) {
+                if(data.status == true) {
+                    window.location.href = "/dashboard";
+                }
+            }).fail(function(data) {
+                if(Array.isArray(data.responseJSON.status)) {
+                    data.responseJSON.status.forEach(element => {
+                        toastr.error(`${element.param}: ${element.msg}`, "Error");
+                    });
+                } else {
+                    toastr.error(data.responseJSON.status);
+                }
+            });
+        }
     });
 });
-function login() {
-    if(window.location.href.includes("/auth/login")) {
-        var username = $('#username').val();
-        var password = $('#password').val();
-        $.post('/auth/login', {username: username, password: password}, function(data) {
-        }).done(function(data) {
-            if(data.status == true) {
-                window.location.href = "/dashboard";
-            }
-        }).fail(function(data) {
-            if(data.responseJSON.status.length > 1) {
-                data.responseJSON.status.forEach(element => {
-                    toastr.error(`${element.param}: ${element.msg}`, "Error");
-                });
-            } else {
-                toastr.error(data.responseJSON.status);
-            }
-        });
-    }
-}
 toastr.options = {
     "closeButton": false,
     "debug": false,

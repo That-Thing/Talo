@@ -15,7 +15,12 @@ router.get('/register', function(req, res, next) {
     res.render('register', {config: config});
 });
 
-//Login request
+/**
+ * Login
+ * @param {string} username
+ * @param {string} password
+ * @returns {json} status
+ */
 router.post('/login', body('username').not().isEmpty().trim().escape(), body('password').not().isEmpty().trim().escape(), function(req, res, next) {
     const errs = validationResult(req);
     if (!errs.isEmpty()) {
@@ -30,8 +35,10 @@ router.post('/login', body('username').not().isEmpty().trim().escape(), body('pa
         }
         if(result.length > 0) { //Account found
             if (result[0].password == password) { //Password matches
-                req.session.loggedin = true;
-                req.session.username = username;
+                req.session.user = result[0].id;
+                req.session.username = result[0].username;
+                req.session.loggedIn = true;
+                req.session.group = result[0].perms;
                 return res.status(200).json({status: true});
             } else { //Password doesn't match
                 return res.status(400).json({ status: errors.auth.invalidPassword });
@@ -40,7 +47,14 @@ router.post('/login', body('username').not().isEmpty().trim().escape(), body('pa
     });
 });
 
-//Register request
+/**
+ * Register
+ * @param {string} username
+ * @param {string} password
+ * @param {string} confirm
+ * @param {invite} invite
+ * @returns {json} status
+ */
 router.post('/register', body('username').not().isEmpty().trim().escape(), body('password').not().isEmpty().trim().escape(), body('confirm').not().isEmpty().trim().escape(), body('invite').optional({checkFalsy: true}).not().isEmpty().escape(), function(req, res, next) {
     const errs = validationResult(req);
     if (!errs.isEmpty()) {
