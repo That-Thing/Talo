@@ -86,3 +86,6 @@ function cat(args) {
 function register() {
     window.location.href = "/auth/register";
 }
+function login() {
+    window.location.href = "/auth/login";
+}

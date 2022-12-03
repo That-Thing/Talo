@@ -5,6 +5,9 @@
         "adminEmail": "admin@localhost",
         "salt": "changeme"
     },
+    "web": {
+        "minify": true
+    },
     "database": {
         "host": "localhost",
         "port": 27017,

@@ -35,6 +35,14 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+if(config.web.minify == true) {
+  var minify = require('express-minify');
+  var compression = require('compression');
+  app.use(compression());
+  app.use(minify({
+    js_match: /js/
+  }));
+}
 app.use(express.static(path.join(__dirname, 'public')));
 
 //Use routers
