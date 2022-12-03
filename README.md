@@ -3,7 +3,8 @@
 
 <p align="center">
   <img src="https://files.catbox.moe/8i6rup.png"><br>
-  The main dashboard and landing page for Interesting Project.
+  The main dashboard and landing page for Interesting Project.<br>
+  <a href="https://github.com/That-Thing/Talo/wiki">Wiki</a>
 </p>
 
 ## Installation
