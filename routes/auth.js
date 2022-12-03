@@ -17,9 +17,9 @@ router.get('/register', function(req, res, next) {
 
 //Login request
 router.post('/login', body('username').not().isEmpty().trim().escape(), body('password').not().isEmpty().trim().escape(), function(req, res, next) {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-        return res.status(400).json({ errors: errors.array() });
+    const errs = validationResult(req);
+    if (!errs.isEmpty()) {
+        return res.status(400).json({ status: errs.array() });
     }
     var username = req.body.username;
     var password = crypto.createHash('sha256').update(req.body.password+config.server.salt).digest('base64');
@@ -41,22 +41,23 @@ router.post('/login', body('username').not().isEmpty().trim().escape(), body('pa
 });
 
 //Register request
-router.post('/register', body('username').not().isEmpty().trim().escape(), body('password').not().isEmpty().trim().escape(), body('invite').optional({checkFalsy: true}).not().isEmpty().escape(), function(req, res, next) {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-        return res.status(400).json({ errors: errors.array() });
+router.post('/register', body('username').not().isEmpty().trim().escape(), body('password').not().isEmpty().trim().escape(), body('confirm').not().isEmpty().trim().escape(), body('invite').optional({checkFalsy: true}).not().isEmpty().escape(), function(req, res, next) {
+    const errs = validationResult(req);
+    if (!errs.isEmpty()) {
+        return res.status(400).json({ status: errs.array() });
     }
     if(config.accounts.registration.enabled == false) {
         return res.status(400).json({ status: errors.auth.registrationDisabled });
     }
     var username = req.body.username;
     var password = req.body.password;
+    var confirm = req.body.confirm;
     var invite = req.body.invite;
-    var password = crypto.createHash('sha256').update(req.body.password+config.server.salt).digest('base64');
+    password = crypto.createHash('sha256').update(req.body.password+config.server.salt).digest('base64');
     connection.query(`SELECT * FROM accounts WHERE username = '${username}'`, function (error, result) {
         if (error) throw error;
         if (result.length > 0) { //Account already exists
-            return res.status(400).json({ status: errors.auth.accountExists });
+            return res.status(400).json({ status: errors.auth.usernameTaken });
         }
         if (result.length == 0) { //Account doesn't exist
             if(config.accounts.registration.inviteOnly == true) { //Invite only is enabled

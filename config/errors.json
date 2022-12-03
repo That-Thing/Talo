@@ -10,8 +10,13 @@
         "invalidUsernameCharacters": "Invalid username characters",
         "invalidEmailCharacters": "Invalid email characters",
         "invalidInvite": "Invalid invite",
+        "missingUsername": "Missing username",
+        "missingPassword": "Missing password",
+        "missingConfirm": "Missing password confirmation",
+        "missingInvite": "Missing invite",
+        "passwordMismatch": "Passwords do not match",
         "registrationDisabled": "Registration is disabled",
-        "usernameTaken": "Username taken",
+        "usernameTaken": "Username already taken",
         "emailTaken": "Email taken"
     }
 }

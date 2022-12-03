@@ -2,6 +2,7 @@ html
     head
         title #{config.branding.title}
         include includes/head.pug
+        script(src="/js/auth.js")
     body(class="d-flex text-bg-dark bg-dark") 
         div(class="cover-container d-flex flex-column p-2 mx-auto mt-3 w-75")
             main 
@@ -12,18 +13,20 @@ html
                     h1(class="card-header") Register
                     div(class="card-body")
                         if config.accounts.registration.enabled == true
-                            form(action="/register" method="post")
                             div(class="mb-3")
                                 label(for="username" class="form-label") Username
-                                input(type="text" class="form-control" id="username" name="username" placeholder="Username")
+                                input(type="text" class="form-control" id="username" name="username" placeholder="Username" required)
                             div(class="mb-3")
                                 label(for="password" class="form-label") Password
-                                input(type="password" class="form-control" id="password" name="password" placeholder="Password")
+                                input(type="password" class="form-control" id="password" name="password" placeholder="Password" required)
+                            div(class="mb-3")
+                                label(for="confirm" class="form-label") Confirm Password
+                                input(type="password" class="form-control" id="confirm" name="confirm" placeholder="Confirm Password" required)
                             if config.accounts.registration.invites == true
                                 div(class="mb-3")
                                     label(for="invite" class="form-label") Invite
-                                    input(type="text" class="form-control" id="invite" name="invite" placeholder="Invite")
-                            button(type="submit" class="btn btn-primary") Register
+                                    input(type="text" class="form-control" id="invite" name="invite" placeholder="Invite" required)
+                            button(type="submit" class="btn btn-primary" id="register") Register
                         else
                             p(class="text-center") Registration is currently disabled.
         footer
