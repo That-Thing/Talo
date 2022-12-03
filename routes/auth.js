@@ -68,6 +68,8 @@ router.post('/register', body('username').not().isEmpty().trim().escape(), body(
     var password = req.body.password;
     var confirm = req.body.confirm;
     var invite = req.body.invite;
+    var ip = (req.headers['x-forwarded-for'] || req.socket.remoteAddress || '').split(',')[0].trim();
+    var date = Date.now();
     if(/^[a-zA-Z0-9]+$/.test(username) == false) { //Check for invalid characters in username
         return res.status(400).json({ status: errors.auth.invalidUsernameCharacters });
     }
@@ -88,7 +90,7 @@ router.post('/register', body('username').not().isEmpty().trim().escape(), body(
                     if (result.length == 0) { //Invite doesn't exist
                         return res.status(400).json({ status: errors.auth.invalidInvite });
                     }
-                    connection.query(`INSERT INTO accounts (username, password, invite, token) VALUES ('${username}', '${password}', '${invite}', '${token}')`, function (error, result) {
+                    connection.query(`INSERT INTO accounts (username, password, invite, token, date, ip) VALUES ('${username}', '${password}', '${invite}', '${token}', ${date}, '${ip}')`, function (error, result) {
                         if (error) throw error;
                         connection.query(`UPDATE invites SET uses = uses + 1 WHERE invite = '${invite}'`, function (error, result) { //Update invite uses
                             if (error) throw error;
@@ -97,7 +99,7 @@ router.post('/register', body('username').not().isEmpty().trim().escape(), body(
                     });
                 });
             } else {
-                connection.query(`INSERT INTO accounts (username, password, token) VALUES ('${username}', '${password}', '${token}')`, function (error, result) {
+                connection.query(`INSERT INTO accounts (username, password, token, date, ip) VALUES ('${username}', '${password}', '${token}', ${date}, '${ip}')`, function (error, result) {
                     if (error) throw error;
                     return res.status(200).json({ status: true, token: token }); //Return status and token
                 });

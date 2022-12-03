@@ -26,7 +26,10 @@ CREATE TABLE IF NOT EXISTS `accounts` (
   `username` text NOT NULL COMMENT 'Username',
   `password` longtext NOT NULL COMMENT 'Hashed Password',
   `invite` text DEFAULT NULL COMMENT 'Invite user used',
+  `invites` int(11) NOT NULL DEFAULT 0 COMMENT 'Amount of invites user can create',
   `token` text NOT NULL COMMENT 'User token',
+  `date` int(11) NOT NULL COMMENT 'Registration date (Unix time)',
+  `ip` text NOT NULL COMMENT 'Registration IP',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
