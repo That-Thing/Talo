@@ -53,6 +53,9 @@ router.post('/register', body('username').not().isEmpty().trim().escape(), body(
     var password = req.body.password;
     var confirm = req.body.confirm;
     var invite = req.body.invite;
+    if(password != confirm) {
+        return res.status(400).json({ status: errors.auth.passwordMismatch });
+    }
     password = crypto.createHash('sha256').update(req.body.password+config.server.salt).digest('base64');
     connection.query(`SELECT * FROM accounts WHERE username = '${username}'`, function (error, result) {
         if (error) throw error;
