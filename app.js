@@ -40,7 +40,8 @@ if(config.web.minify == true) {
   var compression = require('compression');
   app.use(compression());
   app.use(minify({
-    js_match: /js/
+    js_match: /js/,
+    css_match: /css/,
   }));
 }
 app.use(express.static(path.join(__dirname, 'public')));
