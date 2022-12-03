@@ -102,7 +102,14 @@ router.post('/register', body('username').not().isEmpty().trim().escape(), body(
             }
         }
     });
-
 });
 
+/**
+ * Logout
+ * @returns {json} status
+ */
+router.post('/logout', function(req, res, next) {
+    req.session.destroy();
+    return res.status(200).json({ status: true });
+});
 module.exports = router;
