@@ -2,7 +2,7 @@
 # Talo
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/That-Thing/talo/main/public/images/logo.png?token=GHSAT0AAAAAABHNHUJ5X3HJVVPBRMBX6DR6Y4I45XA"><br>
+  <img src="https://files.catbox.moe/8i6rup.png"><br>
   The main dashboard and landing page for Interesting Project.
 </p>
 
