@@ -7,7 +7,7 @@ html
     body(class="d-flex text-bg-dark bg-dark")
         div(class="cover-container d-flex flex-column p-2 mx-auto mt-3 w-75")
             main 
-                img(class="img-fluid mx-auto d-block" src="/images/logo.png" alt=config.branding.title)
+                img(class="img-fluid mx-auto d-block" src=config.branding.logo alt=config.branding.title)
                 div(id="name" class="text-center mt-3")
             div(class="container d-flex mt-5")
                 div(class="card bg-dark w-100" id="terminal")
@@ -21,6 +21,5 @@ html
 
                 
         footer
-            include includes/footer.pug
             script(src="https://unpkg.com/typewriter-effect@2.3.1/dist/core.js")
             script(src="/js/index.js")

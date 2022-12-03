@@ -11,3 +11,10 @@ body {
 #name {
     font-family: 'Courier New', Courier, monospace
 }
+.navbar-title-text {
+    font-family: 'Courier New', Courier, monospace;
+    color: #be3144;
+}
+.navbar-dark {
+    background-color: #1a1a1a!important;
+}

@@ -10,7 +10,7 @@ const config = require('./modules/config');
 var indexRouter = require('./routes/index');
 var cmdRouter = require('./routes/cmd');
 var authRouter = require('./routes/auth');
-
+var dashboardRouter = require('./routes/dashboard');
 // Initialize session
 app.use(session({
 	secret: config.server.salt,
@@ -50,6 +50,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/cmd', cmdRouter);
 app.use('/auth', authRouter);
+app.use('/dashboard', dashboardRouter);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
