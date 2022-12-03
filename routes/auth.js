@@ -54,6 +54,7 @@ router.post('/login', body('username').not().isEmpty().trim().escape(), body('pa
  * @param {string} confirm
  * @param {invite} invite
  * @returns {json} status
+ * @returns {json} token
  */
 router.post('/register', body('username').not().isEmpty().trim().escape(), body('password').not().isEmpty().trim().escape(), body('confirm').not().isEmpty().trim().escape(), body('invite').optional({checkFalsy: true}).not().isEmpty().escape(), function(req, res, next) {
     const errs = validationResult(req);
@@ -73,7 +74,8 @@ router.post('/register', body('username').not().isEmpty().trim().escape(), body(
     if(password != confirm) { //Check if passwords match
         return res.status(400).json({ status: errors.auth.passwordMismatch });
     }
-    password = crypto.createHash('sha256').update(req.body.password+config.server.salt).digest('base64');
+    password = crypto.createHash('sha256').update(req.body.password+config.server.salt).digest('base64'); //Hash password
+    let token = crypto.createHash('sha256').update(username+password+config.server.salt).digest('base64'); //Create user token
     connection.query(`SELECT * FROM accounts WHERE username = '${username}'`, function (error, result) {
         if (error) throw error;
         if (result.length > 0) { //Account already exists
@@ -86,18 +88,18 @@ router.post('/register', body('username').not().isEmpty().trim().escape(), body(
                     if (result.length == 0) { //Invite doesn't exist
                         return res.status(400).json({ status: errors.auth.invalidInvite });
                     }
-                    connection.query(`INSERT INTO accounts (username, password) VALUES ('${username}', '${password}')`, function (error, result) {
+                    connection.query(`INSERT INTO accounts (username, password, invite, token) VALUES ('${username}', '${password}', '${invite}', '${token}')`, function (error, result) {
                         if (error) throw error;
                         connection.query(`UPDATE invites SET uses = uses + 1 WHERE invite = '${invite}'`, function (error, result) { //Update invite uses
                             if (error) throw error;
-                            return res.status(200).json({status: true});
+                            return res.status(200).json({status: true, token: token}); //Return status and token
                         });
                     });
                 });
             } else {
-                connection.query(`INSERT INTO accounts (username, password) VALUES ('${username}', '${password}')`, function (error, result) {
+                connection.query(`INSERT INTO accounts (username, password, token) VALUES ('${username}', '${password}', '${token}')`, function (error, result) {
                     if (error) throw error;
-                    return res.status(200).json({ status: true });
+                    return res.status(200).json({ status: true, token: token }); //Return status and token
                 });
             }
         }
