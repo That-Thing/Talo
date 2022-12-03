@@ -67,7 +67,10 @@ router.post('/register', body('username').not().isEmpty().trim().escape(), body(
     var password = req.body.password;
     var confirm = req.body.confirm;
     var invite = req.body.invite;
-    if(password != confirm) {
+    if(/^[a-zA-Z0-9]+$/.test(username) == false) { //Check for invalid characters in username
+        return res.status(400).json({ status: errors.auth.invalidUsernameCharacters });
+    }
+    if(password != confirm) { //Check if passwords match
         return res.status(400).json({ status: errors.auth.passwordMismatch });
     }
     password = crypto.createHash('sha256').update(req.body.password+config.server.salt).digest('base64');
