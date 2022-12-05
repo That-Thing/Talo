@@ -89,3 +89,8 @@ function register() {
 function login() {
     window.location.href = "/auth/login";
 }
+function motd() {
+    $.get('/cmd/motd', function(data) {
+        newLine(data);
+    });
+}

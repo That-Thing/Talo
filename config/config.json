@@ -28,5 +28,9 @@
             "emailVerification": true,
             "invites": false
         }
+    },
+    "motd": {
+        "enabled": true,
+        "message": "Haud nomine tantum"
     }
 }
