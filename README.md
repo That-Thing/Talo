@@ -36,7 +36,7 @@ mysql -u username -p
 ```
 In the MySQL console, execute the database SQL file.
 ```bash
-mysql> source /path/to/talo/database.sql
+mysql> source database.sql
 ```
 
 #### Nginx Reverse Proxy
