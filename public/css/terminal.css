@@ -3,19 +3,6 @@
     height: 500px;
     font-family: 'Source Code Pro', monospace;
 }
-#terminal ::-webkit-scrollbar {
-    width: 8px;
-}
-#terminal ::-webkit-scrollbar-thumb {
-    background: #1b1b1b;
-    border-radius: 50px;
-}
-#terminal ::-webkit-scrollbar-thumb:hover {
-    background: #1b1b1beb;
-}
-#terminal ::-webkit-scrollbar-track {
-    background: transparent;
-}
 #terminal-input {
     border: none;
     box-shadow: none;

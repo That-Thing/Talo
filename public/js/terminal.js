@@ -42,7 +42,10 @@ function help() {
         'echo': 'Prints the arguments [Usage: echo &lt;text&gt;]',
         'ls': 'Lists the files in the current directory',
         'cat': 'Prints the contents of a file [Usage: cat &lt;file&gt; ]',
-        'help': 'Prints this help message'
+        'help': 'Prints this help message',
+        'register': 'Register a new account',
+        'login': 'Login to your account',
+        'motd': 'Prints the message of the day'
     }
     for(command in commands) {
         newLine(command + ' - ' + commands[command]);
@@ -73,7 +76,6 @@ function cat(args) {
         if(files[file]) {
             $.get(files[file], function(data) {
                 let lines = data.split("\n");
-                console.log(lines);
                 for(let i = 0; i < lines.length; i++) {
                     newLine(lines[i]);
                 }

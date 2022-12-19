@@ -2,11 +2,12 @@ html
     head
         title #{config.branding.title}
         include includes/head.pug
+        link(rel="stylesheet" href="/css/dashboard.css")
     body(class="bg-dark text-light")
         include includes/navbar.pug
         div(class="container-fluid mt-5")
             div(class="row justify-content-center")
-                div(class="col-12 col-md-3 col-lg-5")
+                div(class="col-12 col-md-3 col-lg-5 mb-3")
                     div(class="card bg-dark text-light")
                         h3(class="card-header") Dashboard
                         div(class="card-body")
@@ -17,8 +18,19 @@ html
                             p(class="card-text") Lorem ipsum. Stats or something will be put here. 
                 div(class="col-12 col-md-9 col-lg-5")
                     div(class="card bg-dark text-light")
-                        h3(class="card-header") Website Statistics
-                        div(class="card-body")
-                            p(class="card-text") Long vertical card. Stats or something will be put here.
+                        h3(class="card-header") News
+                        div(class="card-body news-body")
+                            div(class="card bg-dark text-light")
+                                h5(class="card-header d-flex")
+                                    span
+                                        | News Title
+                                        span(class="text-muted fst-italic ms-2") 12/25/2022
+                                        span(class="text-muted ms-2 h6") [Author_Username]
+                                    span(class="ms-auto")
+                                        a(href="#" class="btn btn-sm btn-outline-light")
+                                            i(class="fa-solid fa-pencil")
+                                div(class="card-body")
+                                    pre(class="card-text")
+                                        | Lorem ipsum dolor sit amet, consectetur adipiscing elit.
         footer 
             include includes/footer.pug

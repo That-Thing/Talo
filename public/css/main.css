@@ -18,3 +18,16 @@ body {
 .navbar-dark {
     background-color: #1a1a1a!important;
 }
+::-webkit-scrollbar {
+    width: 8px;
+}
+::-webkit-scrollbar-thumb {
+    background: #1b1b1b;
+    border-radius: 50px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #1b1b1beb;
+}
+::-webkit-scrollbar-track {
+    background: transparent;
+}

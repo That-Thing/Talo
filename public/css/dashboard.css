@@ -1,0 +1,4 @@
+.news-body {
+    height: 40em;
+    overflow-y: scroll;
+}
