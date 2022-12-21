@@ -38,7 +38,7 @@ router.post('/login', body('username').not().isEmpty().trim().escape(), body('pa
                 req.session.user = result[0].id;
                 req.session.username = result[0].username;
                 req.session.loggedIn = true;
-                req.session.group = result[0].perms;
+                req.session.group = result[0].group;
                 return res.status(200).json({status: true});
             } else { //Password doesn't match
                 return res.status(400).json({ status: errors.auth.invalidPassword });
