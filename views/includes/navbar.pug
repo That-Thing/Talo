@@ -5,10 +5,18 @@ nav(class="navbar navbar-expand-lg navbar-dark bg-dark")
         span(class="navbar-toggler-icon")
     div(class="collapse navbar-collapse" id="navbar")
         div(class="navbar-nav")
-            a(class="nav-item nav-link active" href="#") Dashboard 
-            a(class="nav-item nav-link" href="#") Text
-            a(class="nav-item nav-link" href="#") Text 2
-            a(class="nav-item nav-link" href="#") Text 3
+            if(path == "/")
+                a(class="nav-link active" aria-current="page" href="#") Home
+            else
+                a(class="nav-link" aria-current="page" href="/") Home
+            if(path == "/profile")
+                a(class="nav-link active" href="#") Profile
+            else
+                a(class="nav-link" href="/profile") Profile
+            if(path == "/settings")
+                a(class="nav-link active" href="#") Settings
+            else
+                a(class="nav-link" href="/settings") Settings
         div(class="navbar-nav ms-auto")
             a(class="nav-item nav-link" href="#" id="logout") Logout
                 i(class="fa-solid fa-arrow-right-from-bracket ms-2")
