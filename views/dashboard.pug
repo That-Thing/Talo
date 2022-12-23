@@ -15,7 +15,15 @@ html
                     div(class="card bg-dark text-light mt-3")
                         h3(class="card-header") User Info
                         div(class="card-body")
-                            p(class="card-text") Lorem ipsum. Stats or something will be put here. 
+                            p(class="card-text") Username:
+                                span(class="text-muted ms-2") #{user.username}
+                            p(class="card-text") ID:
+                                span(class="text-muted ms-2") #{user.id}
+                            p(class="card-text") Permission Level:
+                                span(class="text-muted ms-2") #{user.group}
+                            p(class="card-text") Invites:
+                                span(class="text-muted ms-2") #{user.invites}
+
                 div(class="col-12 col-md-9 col-lg-5")
                     div(class="card bg-dark text-light")
                         h3(class="card-header") News

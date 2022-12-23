@@ -1,0 +1,20 @@
+html
+    head
+        title Setup
+        include ../includes/head.pug
+    body(class="d-flex text-bg-dark bg-dark")
+        div(class="cover-container d-flex flex-column p-2 mx-auto mt-3 w-75")
+            div(class="container-fluid mt-5")
+                div(class="row justify-content-center")
+                    div(class="card bg-dark text-light mx-auto")
+                        h1(class="card-header") Setup
+                        div(class="card-body")
+                            div(class="row")
+                                div(class="col-12")
+                                    p(class="card-text") Welcome to the setup wizard. This will guide you through the process of setting up your new instance of Talo.
+                                div(class="col-12")
+                                    p(class="card-text") Please note that this wizard will only work if you have not yet set up your instance. If you have already set up your instance, you will need to go through the admin settings or manually edit the configuration file.
+                                div(class="col-12")
+                                    p(class="card-text") If you have not yet set up your instance, please click the button below to begin the setup process.
+                                div(class="col-12 mt-3")
+                                    a(href="/setup/step/1" class="btn btn-primary") Begin Setup

@@ -1,0 +1,41 @@
+html
+    head
+        title Setup Step 1
+        include ../includes/head.pug
+    body(class="d-flex text-bg-dark bg-dark")
+        div(class="cover-container d-flex flex-column p-2 mx-auto mt-3 w-75")
+            div(class="container-fluid mt-5")
+                div(class="row justify-content-center")
+                    div(class="card bg-dark text-light mx-auto")
+                        h1(class="card-header") Step 1
+                        div(class="card-body")
+                            div(class="row")
+                                div(class="col-12")
+                                    p(class="card-text") This is step 1 of the setup process. This step will allow you to configure and initialize the database.
+                                    | Once you click set, the database will be initialized and you will be redirected to the next step.
+
+                            div(class="form-group row mt-3")
+                                label(for="dbhost" class="col-sm-1 col-form-label") Host
+                                div(class="col-sm-10")
+                                    input(type="text" class="form-control w-25" id="dbhost" name="dbhost" placeholder="localhost" value="localhost")
+                            div(class="form-group row mt-2")
+                                label(for="dbport" class="col-sm-1 col-form-label") Port
+                                div(class="col-sm-10")
+                                    input(type="text" class="form-control w-25" id="dbport" name="dbport" placeholder="27017" value="27017")
+                            div(class="form-group row mt-2")
+                                label(for="dbhost" class="col-sm-1 col-form-label") Name
+                                div(class="col-sm-10")
+                                    input(type="text" class="form-control w-25" id="dbname" name="dbname" placeholder="talo" value="talo")
+                            div(class="form-group row mt-2")
+                                label(for="dbhost" class="col-sm-1 col-form-label") User
+                                div(class="col-sm-10")
+                                    input(type="text" class="form-control w-25" id="dbuser" name="dbuser" placeholder="root" value="root")
+                            div(class="form-group row mt-2")
+                                label(for="dbhost" class="col-sm-1 col-form-label") Password
+                                div(class="col-sm-10")
+                                    input(type="password" class="form-control w-25" id="dbpassword" name="dbpassword" placeholder="password")
+                            div(class="row mt-3")
+                                div(class="col-12")
+                                    button(type="button" class="btn btn-primary" id="btnNext") Set
+
+

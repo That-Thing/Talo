@@ -11,6 +11,8 @@ var indexRouter = require('./routes/index');
 var cmdRouter = require('./routes/cmd');
 var authRouter = require('./routes/auth');
 var dashboardRouter = require('./routes/dashboard');
+var setupRouter = require('./routes/setup');
+const url = require("url");
 // Initialize session
 app.use(session({
 	secret: config.server.salt,
@@ -26,7 +28,15 @@ function setSession (req, res, next) {
   next();
 }
 app.use(setSession);
-
+//Setuplock check
+if(config.server.setupLock === false) {
+  app.use(function (req, res, next) {
+    if (!req.path.startsWith('/setup')) {
+      next(createError(404));
+    }
+    next();
+  });
+}
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
@@ -51,7 +61,7 @@ app.use('/', indexRouter);
 app.use('/cmd', cmdRouter);
 app.use('/auth', authRouter);
 app.use('/dashboard', dashboardRouter);
-
+app.use('/setup', setupRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

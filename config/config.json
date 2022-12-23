@@ -18,6 +18,7 @@
     },
     "branding": {
         "logo": "/images/logo.png",
+        "favicon": "/images/favicon.png",
         "title": "Interesting Project",
         "description": "Haud nomine tantum",
         "contactEmail": "contact@localhost"
