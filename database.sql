@@ -1,10 +1,3 @@
--- --------------------------------------------------------
--- Host:                         127.0.0.1
--- Server version:               10.4.11-MariaDB - mariadb.org binary distribution
--- Server OS:                    Win64
--- HeidiSQL Version:             12.2.0.6576
--- --------------------------------------------------------
-
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET NAMES utf8 */;
 /*!50503 SET NAMES utf8mb4 */;
@@ -14,12 +7,9 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
-
--- Dumping database structure for talo
 CREATE DATABASE IF NOT EXISTS `talo` /*!40100 DEFAULT CHARACTER SET utf8mb4 */;
 USE `talo`;
 
--- Dumping structure for table talo.accounts
 CREATE TABLE IF NOT EXISTS `accounts` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'User ID',
   `group` tinyint(4) NOT NULL DEFAULT 0 COMMENT 'Group ID',
@@ -33,9 +23,12 @@ CREATE TABLE IF NOT EXISTS `accounts` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- Data exporting was unselected.
+REPLACE INTO `accounts` (`id`, `group`, `username`, `password`, `invite`, `invites`, `token`, `date`, `ip`) VALUES
+	(1, 2, 'test', 'mDIiELPsWY+rVNKsJXFhyKCRW+oS99MTRO4XzKAGoCE=', NULL, 100, '8TZ06hnpywXAciE60tJifw9W+ImJYX1aZ+4seQvUROQ=', 0, ''),
+	(2, 0, 'user', 'i8u6QawPf4GAxWQ4HaMFGHrAUlUrW4SkxjNqF2mwi2c=', NULL, 0, 'ZAt+zGlBRTzYKs/e/lL9S69N1ag3ev2Jfci3oNM9FYY=', 0, ''),
+	(3, 0, 'test22', 'mDIiELPsWY+rVNKsJXFhyKCRW+oS99MTRO4XzKAGoCE=', NULL, 0, '7hhEx0iDG5lrpxE0UpBA8w0D2upeVX9iwGMcxPAXlYY=', 2147483647, '::1'),
+	(4, 0, 'user1', 'mDIiELPsWY+rVNKsJXFhyKCRW+oS99MTRO4XzKAGoCE=', NULL, 0, 'sLbJvJsMIqeCX93LenJdFs5HOfgvb3AEogEVlvmODhU=', 2147483647, '::ffff:127.0.0.1');
 
--- Dumping structure for table talo.invites
 CREATE TABLE IF NOT EXISTS `invites` (
   `invite` text NOT NULL COMMENT 'Invite text',
   `creator` int(11) NOT NULL COMMENT 'Invite creator',
@@ -44,7 +37,16 @@ CREATE TABLE IF NOT EXISTS `invites` (
   `date` int(11) NOT NULL COMMENT 'Unix timestamp'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- Data exporting was unselected.
+
+CREATE TABLE IF NOT EXISTS `news` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'ID of news post',
+  `author` int(11) NOT NULL COMMENT 'Author ID',
+  `date` int(11) NOT NULL COMMENT 'Post date',
+  `title` text NOT NULL COMMENT 'Post title',
+  `content` text NOT NULL COMMENT 'Post content',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

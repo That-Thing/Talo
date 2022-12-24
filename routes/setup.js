@@ -30,7 +30,7 @@ router.post("/step/1", body('dbhost').not().isEmpty().trim().escape(), body('dbu
         host: req.body.dbhost,
         user: req.body.dbuser,
         password: req.body.dbpassword,
-        database: req.body.dbname
+        multipleStatements: true //Allow multiple statements in one query
     });
     connection.connect(function(err) {
         if (err) {//Return error json if connection fails
@@ -39,11 +39,13 @@ router.post("/step/1", body('dbhost').not().isEmpty().trim().escape(), body('dbu
         config.database.host = req.body.dbhost;
         config.database.user = req.body.dbuser;
         config.database.password = req.body.dbpassword;
-        config.database.name = req.body.dbname;
         fs.writeFile('./config/config.json', JSON.stringify(config, null, 4), function (err) { //Write db config to config.json
-            return res.status(400).json({ error: err });
+            if (err) {
+                return res.status(400).json({ error: err });
+            }
         });
         let sql = fs.readFileSync('database.sql').toString(); //Read database.sql
+        console.log(sql);
         connection.query(sql, function (err, result) { //Execute database.sql
             if (err) {
                 return res.status(400).json({ error: err });

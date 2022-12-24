@@ -7,11 +7,14 @@ var app = express();
 const session = require('express-session');
 const config = require('./modules/config');
 //Routers
-var indexRouter = require('./routes/index');
-var cmdRouter = require('./routes/cmd');
-var authRouter = require('./routes/auth');
-var dashboardRouter = require('./routes/dashboard');
-var setupRouter = require('./routes/setup');
+if(config.server.setupLock == true) { //Only allow setup if setupLock is disabled
+    var indexRouter = require('./routes/index');
+    var cmdRouter = require('./routes/cmd');
+    var authRouter = require('./routes/auth');
+    var dashboardRouter = require('./routes/dashboard');
+} else {
+    var setupRouter = require('./routes/setup');
+}
 const url = require("url");
 // Initialize session
 app.use(session({
@@ -28,15 +31,6 @@ function setSession (req, res, next) {
   next();
 }
 app.use(setSession);
-//Setuplock check
-if(config.server.setupLock === false) {
-  app.use(function (req, res, next) {
-    if (!req.path.startsWith('/setup')) {
-      next(createError(404));
-    }
-    next();
-  });
-}
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
@@ -57,12 +51,14 @@ if(config.web.minify == true) {
 app.use(express.static(path.join(__dirname, 'public')));
 
 //Use routers
-app.use('/', indexRouter);
-app.use('/cmd', cmdRouter);
-app.use('/auth', authRouter);
-app.use('/dashboard', dashboardRouter);
-app.use('/setup', setupRouter);
-
+if(config.server.setupLock === true) {
+  app.use('/', indexRouter);
+  app.use('/cmd', cmdRouter);
+  app.use('/auth', authRouter);
+  app.use('/dashboard', dashboardRouter);
+} else {
+  app.use('/setup', setupRouter);
+}
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));

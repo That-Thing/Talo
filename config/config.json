@@ -1,6 +1,6 @@
 {
     "server": {
-        "setupLock": true,
+        "setupLock": false,
         "port": 3000,
         "dev": true,
         "adminEmail": "admin@localhost",
