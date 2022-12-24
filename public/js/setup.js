@@ -11,12 +11,28 @@ $(function () {
             }
         }).done(function (data) {
             toastr.success("Database initialized");
-            //Wait 2 seconds before redirecting
             setTimeout(function () {
                 window.location.href = "/setup/step/2";
             }, 2000);
         }).fail(function (data) {
-            console.log(data);
+            toastr.error(data.status + ": " + data.statusText);
+        });
+    });
+    $("#register").click(function () {
+        $.ajax({
+            url: "/setup/step/2",
+            type: "POST",
+            data: {
+                username: $("#username").val(),
+                password: $("#password").val(),
+                password2: $("#password2").val()
+            }
+        }).done(function (data) {
+            toastr.success("Account created");
+            setTimeout(function () {
+                window.location.href = "/setup/step/3";
+            }, 2000);
+        }).fail(function (data) {
             toastr.error(data.status + ": " + data.statusText);
         });
     });
