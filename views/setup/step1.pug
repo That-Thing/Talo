@@ -2,6 +2,7 @@ html
     head
         title Setup Step 1
         include ../includes/head.pug
+        script(src='/js/setup.js')
     body(class="d-flex text-bg-dark bg-dark")
         div(class="cover-container d-flex flex-column p-2 mx-auto mt-3 w-75")
             div(class="container-fluid mt-5")
@@ -36,6 +37,7 @@ html
                                     input(type="password" class="form-control w-25" id="dbpassword" name="dbpassword" placeholder="password")
                             div(class="row mt-3")
                                 div(class="col-12")
-                                    button(type="button" class="btn btn-primary" id="btnNext") Set
-
+                                    button(type="button" class="btn btn-primary" id="btnInit") Initialize
+                        div(class="card-footer text-muted")
+                            | Once you click set, you will only be able to modify the database configuration by editing the config.json file.
 
