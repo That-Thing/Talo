@@ -1,0 +1,33 @@
+html
+    head
+        title Setup Step 2
+        include ../includes/head.pug
+        script(src='/js/setup.js')
+    body(class="d-flex text-bg-dark bg-dark")
+        div(class="cover-container d-flex flex-column p-2 mx-auto mt-3 w-75")
+            div(class="container-fluid mt-5")
+                div(class="row justify-content-center")
+                    div(class="card bg-dark text-light mx-auto")
+                        h1(class="card-header") Step 1: Administrator Account
+                        div(class="card-body")
+                            div(class="row")
+                                div(class="col-12")
+                                    p(class="card-text") This step will allow you to create an administrator account. This account will be used to manage the application and its users.
+                            div(class="form-group row mt-3")
+                                label(for="username" class="col-sm-1 col-form-label") Username
+                                div(class="col-sm-10")
+                                    input(type="text" class="form-control w-25" id="username" name="username" placeholder="administrator" value="")
+                            div(class="form-group row mt-2")
+                                label(for="password" class="col-sm-1 col-form-label") Password
+                                div(class="col-sm-10")
+                                    input(type="password" class="form-control w-25" id="password" name="password" placeholder="password")
+                            div(class="form-group row mt-2")
+                                label(for="password" class="col-sm-1 col-form-label") Confirm Password
+                                div(class="col-sm-10")
+                                    input(type="password" class="form-control w-25" id="password2" name="password2" placeholder="confirm password")
+                            div(class="row mt-3")
+                                div(class="col-12")
+                                    button(type="button" class="btn btn-primary" id="btnInit") Register
+                        div(class="card-footer text-muted")
+                            | It is recommended that you select a strong password for your administrator account.
+

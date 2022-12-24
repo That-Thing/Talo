@@ -31,3 +31,6 @@ body {
 ::-webkit-scrollbar-track {
     background: transparent;
 }
+.card {
+    padding: 0px!important;
+}
