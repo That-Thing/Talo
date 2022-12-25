@@ -15,12 +15,12 @@ $(function () {
                 window.location.href = "/setup/step/2";
             }, 2000);
         }).fail(function (data) {
-            toastr.error(data.status + ": " + data.statusText);
+            toastr.error(responseJSON.error);
         });
     });
     $("#register").click(function () {
         $.ajax({
-            url: "/setup/step/2",
+            url: "/setup/step/3",
             type: "POST",
             data: {
                 username: $("#username").val(),
@@ -30,10 +30,11 @@ $(function () {
         }).done(function (data) {
             toastr.success("Account created");
             setTimeout(function () {
-                window.location.href = "/setup/step/3";
+                window.location.href = "/setup/step/4";
             }, 2000);
         }).fail(function (data) {
-            toastr.error(data.status + ": " + data.statusText);
+            console.log(data);
+            toastr.error(data.responseJSON.error);
         });
     });
 });
