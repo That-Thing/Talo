@@ -77,7 +77,7 @@ router.post("/step/3", body('username').not().isEmpty().trim().escape(), body('p
     if(/^[a-zA-Z0-9]+$/.test(username) === false) { //Check for invalid characters in username
         return res.status(400).json({ status: errors.auth.invalidUsernameCharacters });
     }
-    connection.query(`INSERT INTO accounts (username, password, token, date, ip) VALUES ('${username}', '${password}', '${token}', ${date}, '${ip}')`, function (err, result) {
+    connection.query(`INSERT INTO accounts (group, username, password, token, date, ip) VALUES (3, '${username}', '${password}', '${token}', ${date}, '${ip}')`, function (err, result) {
         if (err) {
             return res.status(400).json({error: err.sqlMessage});
         }
