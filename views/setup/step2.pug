@@ -1,0 +1,92 @@
+html
+    head
+        title Setup Step 2
+        include ../includes/head.pug
+        script(src='/js/setup.js')
+    body(class="d-flex text-bg-dark bg-dark")
+        div(class="cover-container d-flex flex-column p-2 mx-auto mt-3 w-75")
+            div(class="container-fluid mt-5")
+                div(class="row")
+                    div(class="card bg-dark text-light mx-auto")
+                        h1(class="card-header") Step 2: Configuration
+                        div(class="card-body")
+                            div(class="row")
+                                p(class="card-text") This step will allow you to configure Talo.
+                                div(class="col-lg")
+                                    div(class="row")
+                                    h3 Server
+                                    div(class="input-group mb-3 col-auto w-50")
+                                        span(class="input-group-text bg-dark text-light" id="email-label") Admin email
+                                        input(type="email" class="form-control form-control-sm bg-dark text-light" id="email" name="email" placeholder="admin@localhost" aria-describedby="email-label" value=config.server.email)
+                                    div(class="input-group mb-3 col-auto w-50")
+                                        span(class="input-group-text bg-dark text-light" id="salt-label") Salt
+                                        input(type="text" class="form-control form-control-sm bg-dark text-light" id="salt" name="salt" placeholder="salt" aria-describedby="salt-label")
+                                        button(type="button" class="btn btn-primary" id="generate-salt")
+                                            i(class="fa-solid fa-dice")
+                                    h3(class="mt-3") Web
+                                    div(class="form-check form-switch mb-3 col-auto d-flex ps-0 w-50")
+                                        label(class="form-check-label" for="minify") Minify CSS and JS
+                                        if config.web.minify === true
+                                            input(class="form-check-input ms-2" type="checkbox" id="minify" checked)
+                                        else
+                                            input(class="form-check-input ms-2" type="checkbox" id="minify")
+                                    h3 Branding
+                                    div(class="input-group mb-3 col-auto w-50")
+                                        span(class="input-group-text bg-dark text-light" id="logo-label") Logo
+                                        input(type="text" class="form-control form-control-sm bg-dark text-light" id="logo" name="logo" placeholder="logo" aria-describedby="logo-label" value=config.branding.logo)
+                                    div(class="input-group mb-3 col-auto w-50")
+                                        span(class="input-group-text bg-dark text-light" id="favicon-label") Favicon
+                                        input(type="text" class="form-control form-control-sm bg-dark text-light" id="favicon" name="favicon" placeholder="favicon" aria-describedby="favicon-label" value=config.branding.favicon)
+                                    div(class="input-group mb-3 col-auto w-50")
+                                        span(class="input-group-text bg-dark text-light" id="title-label") Title
+                                        input(type="text" class="form-control form-control-sm bg-dark text-light" id="title" name="title" placeholder="title" aria-describedby="title-label" value=config.branding.title)
+                                    div(class="input-group mb-3 col-auto w-50")
+                                        span(class="input-group-text bg-dark text-light" id="description-label") Description
+                                        input(type="text" class="form-control form-control-sm bg-dark text-light" id="description" name="description" placeholder="description" aria-describedby="description-label" value=config.branding.description)
+                                    div(class="input-group mb-3 col-auto w-50")
+                                        span(class="input-group-text bg-dark text-light" id="keywords-label") Keywords
+                                        input(type="text" class="form-control form-control-sm bg-dark text-light" id="keywords" name="keywords" placeholder="keywords" aria-describedby="keywords-label" value=config.branding.keywords)
+                                    div(class="input-group mb-3 col-auto w-50")
+                                        span(class="input-group-text bg-dark text-light" id="author-label") Author
+                                        input(type="text" class="form-control form-control-sm bg-dark text-light" id="author" name="author" placeholder="author" aria-describedby="author-label" value=config.branding.author)
+                                    div(class="input-group mb-3 col-auto w-50")
+                                        span(class="input-group-text bg-dark text-light" id="contact-email-label") Contact Email
+                                        input(type="text" class="form-control form-control-sm bg-dark text-light" id="contact-email" name="contact-email" placeholder="contact-email" aria-describedby="contact-email-label" value=config.branding.contactEmail)
+                                div(class="col-lg")
+                                    h3(class="mt-3") Accounts
+                                    div(class="form-check form-switch mb-3 col-auto d-flex ps-0 w-50")
+                                        label(class="form-check-label" for="registration") Registration
+                                        if config.accounts.registration.enabled === true
+                                            input(class="form-check-input ms-2" type="checkbox" id="registration" checked)
+                                        else
+                                            input(class="form-check-input ms-2" type="checkbox" id="registration")
+                                    div(class="form-check form-switch mb-3 col-auto d-flex ps-0 w-50")
+                                        label(class="form-check-label" for="email-verification") Email verification
+                                        if config.accounts.registration.emailVerification === true
+                                            input(class="form-check-input ms-2" type="checkbox" id="email-verification" checked)
+                                        else
+                                            input(class="form-check-input ms-2" type="checkbox" id="email-verification")
+                                    div(class="form-check form-switch mb-3 col-auto d-flex ps-0 w-50")
+                                        label(class="form-check-label" for="invites") Invites
+                                        if config.accounts.registration.invites === true
+                                            input(class="form-check-input ms-2" type="checkbox" id="invites" checked)
+                                        else
+                                            input(class="form-check-input ms-2" type="checkbox" id="invites")
+                                    div(class="input-group mb-3 col-auto w-50")
+                                        span(class="input-group-text bg-dark text-light" id="min-password-length-label") Minimum password length
+                                        input(type="number" class="form-control form-control-sm bg-dark text-light" id="min-password-length" name="min-password-length" placeholder="6" aria-describedby="min-password-length-label" value=config.accounts.registration.minPasswordLength)
+                                    h3 MOTD
+                                    div(class="form-check form-switch mb-3 col-auto d-flex ps-0 w-50")
+                                        label(class="form-check-label" for="motd") MOTD
+                                        if config.motd.enabled === true
+                                            input(class="form-check-input ms-2" type="checkbox" id="motd" checked)
+                                        else
+                                            input(class="form-check-input ms-2" type="checkbox" id="motd")
+                                    div(class="input-group mb-3 col-auto w-50")
+                                        span(class="input-group-text bg-dark text-light" id="motd-message-label") Message
+                                        input(type="text" class="form-control form-control-sm bg-dark text-light" id="motd-message" name="motd-message" placeholder="message" aria-describedby="motd-message-label" value=config.motd.message)
+                            div(class="row")
+                                button(id="config-submit" class="btn btn-primary mt-3 mx-auto w-25") Save
+                        div(class="card-footer text-muted")
+                            | Settings can later be edited in the admin settings or by modifying the config.json file.
+

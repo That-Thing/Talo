@@ -21,12 +21,15 @@
         "favicon": "/images/favicon.png",
         "title": "Interesting Project",
         "description": "Haud nomine tantum",
+        "keywords": "talo, interesting, project",
+        "author": "Interesting Project",
         "contactEmail": "contact@localhost"
     },
     "accounts": {
         "registration": {
             "enabled": true,
-            "emailVerification": true,
+            "emailVerification": false,
+            "minPasswordLength": 6,
             "invites": false
         }
     },
