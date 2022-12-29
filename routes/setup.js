@@ -1,6 +1,6 @@
-var express = require('express');
-var createError = require('http-errors');
-var router = express.Router();
+const express = require('express');
+const createError = require('http-errors');
+const router = express.Router();
 const config = require('../modules/config');
 const errors = require('../modules/errors');
 const mysql = require('mysql');
@@ -54,7 +54,13 @@ router.post("/step/1", body('dbhost').not().isEmpty().trim().escape(), body('dbu
         });
     });
 });
-
+/***
+ * Step 3: Admin account setup
+ * @param {string} username
+ * @param {string} password
+ * @param {string} password2 (repeat password)
+ * @return {json} status
+ */
 router.post("/step/3", body('username').not().isEmpty().trim().escape(), body('password').not().isEmpty().trim().escape(), body('password2').not().isEmpty().trim().escape(), function(req, res) {
     const errs = validationResult(req);
     if (!errs.isEmpty()) {

@@ -61,7 +61,7 @@ router.post('/register', body('username').not().isEmpty().trim().escape(), body(
     if (!errs.isEmpty()) {
         return res.status(400).json({ status: errs.array() });
     }
-    if(config.accounts.registration.enabled == false) {
+    if(config.accounts.registration.enabled === false) {
         return res.status(400).json({ status: errors.auth.registrationDisabled });
     }
     var username = req.body.username;
@@ -70,10 +70,10 @@ router.post('/register', body('username').not().isEmpty().trim().escape(), body(
     var invite = req.body.invite;
     var ip = (req.headers['x-forwarded-for'] || req.socket.remoteAddress || '').split(',')[0].trim();
     var date = Date.now();
-    if(/^[a-zA-Z0-9]+$/.test(username) == false) { //Check for invalid characters in username
+    if(/^[a-zA-Z0-9]+$/.test(username) === false) { //Check for invalid characters in username
         return res.status(400).json({ status: errors.auth.invalidUsernameCharacters });
     }
-    if(password != confirm) { //Check if passwords match
+    if(password !== confirm) { //Check if passwords match
         return res.status(400).json({ status: errors.auth.passwordMismatch });
     }
     if(password.length < config.accounts.registration.minPasswordLength) { //Check if password is too short
@@ -86,8 +86,8 @@ router.post('/register', body('username').not().isEmpty().trim().escape(), body(
         if (result.length > 0) { //Account already exists
             return res.status(400).json({ status: errors.auth.usernameTaken });
         }
-        if (result.length == 0) { //Account doesn't exist
-            if(config.accounts.registration.inviteOnly == true) { //Invite only is enabled
+        if (result.length === 0) { //Account doesn't exist
+            if(config.accounts.registration.inviteOnly === true) { //Invite only is enabled
                 connection.query(`SELECT * FROM invites WHERE invite='${invite}'`, function (error, result) {
                     if (error) throw error;
                     if (result.length == 0) { //Invite doesn't exist

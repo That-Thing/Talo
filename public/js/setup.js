@@ -18,6 +18,37 @@ $(function () {
             toastr.error(responseJSON.error);
         });
     });
+    $("#config-submit").click(function () {
+        $.ajax({
+            url: "/setup/step/2",
+            type: "POST",
+            data: {
+                email: $("#email").val(),
+                salt: $("#salt").val(),
+                minify: true ? $("#minify").is(":checked") : false,
+                logo: $("#logo").val(),
+                favicon: $("#favicon").val(),
+                title: $("#title").val(),
+                description: $("#description").val(),
+                keywords: $("#keywords").val(),
+                author: $("#author").val(),
+                contactemail: $("#contact-email").val(),
+                registration: true ? $("#registration").is(":checked") : false,
+                emailVerfication: true ? $("#email-verification").is(":checked") : false,
+                invites: true ? $("#invites").is(":checked") : false,
+                minPasswordLength: $("#min-password-length").val(),
+                motd: true ? $("#motd").is(":checked") : false,
+                motdMessage: $("#motd-message").val()
+            }
+        }).done(function (data) {
+            toastr.success("Configuration saved");
+            setTimeout(function () {
+                window.location.href = "/setup/step/5";
+            }, 2000);
+        }).fail(function (data) {
+            toastr.error(data.responseJSON.error);
+        });
+    });
     $("#register").click(function () {
         $.ajax({
             url: "/setup/step/3",

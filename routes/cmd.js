@@ -8,7 +8,7 @@ const config = require('../modules/config.js');
  * @return {string} message of the day
  */
 router.get('/motd', function(req, res, next) {
-    if(config.motd.enabled == true) {
+    if(config.motd.enabled === true) {
         return res.send(config.motd.message);
     }
 });
