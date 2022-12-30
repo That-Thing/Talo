@@ -98,9 +98,9 @@ router.post("/step/2",
             config.server.salt = crypto.randomBytes(64).toString('hex').substring(0, 64);
         }
         if(req.body.minify === "true") {
-            config.server.minify = true;
+            config.web.minify = true;
         } else {
-            config.server.minify = false;
+            config.web.minify = false;
         }
         config.branding.logo = req.body.logo;
         config.branding.favicon = req.body.favicon;
@@ -175,21 +175,17 @@ router.post("/step/3", body('username').not().isEmpty().trim().escape(), body('p
     });
 });
 /***
- * Step 4: Finish setup
+ * Step 4: Finish setup and exit program.
  * @return {json} status
  */
 router.post("/step/4", function(req, res) {
     config.server.setupLock = true;
-    fs.writeFile('./config/config.json', JSON.stringify(config, null, 4), function (err) { //Write setup to setup.json
+    fs.writeFile('./config/config.json', JSON.stringify(config, null, 4), function (err) {
         if (err) {
             return res.status(400).json({error: err});
         }
-        return res.status(200).json({success: true});
+        res.status(200).json({success: true});
         process.exit(1);
     });
 });
-
-
-
-
 module.exports = router;

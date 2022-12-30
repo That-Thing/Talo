@@ -73,16 +73,11 @@ $(function () {
         $("#salt").val(salt);
     })
     $("#btn-complete").click(function () {
+        $("#btn-complete").addClass("disabled");
+        toastr.success("Setup complete");
         $.ajax({
             url: "/setup/step/4",
             type: "POST"
-        }).done(function (data) {
-            toastr.success("Setup complete");
-            setTimeout(function () {
-                window.location.href = "/";
-            }, 1000);
-        }).fail(function (data) {
-            toastr.error(data.responseJSON.error);
         });
     });
 });

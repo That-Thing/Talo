@@ -10,7 +10,7 @@
         "motd": true
     },
     "web": {
-        "minify": false
+        "minify": true
     },
     "database": {
         "host": "localhost",
