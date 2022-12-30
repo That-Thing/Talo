@@ -4,9 +4,9 @@
         "port": 3000,
         "dev": true,
         "adminEmail": "admin@localhost",
-        "salt": "changeme",
+        "salt": "kvn2b7i8chq4w8oh2zru6w",
         "email": "admin@localhost",
-        "minify": false,
+        "minify": true,
         "motd": true
     },
     "web": {

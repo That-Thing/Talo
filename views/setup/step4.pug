@@ -1,0 +1,18 @@
+html
+    head
+        title Setup Complete
+        include ../includes/head.pug
+    body(class="d-flex text-bg-dark bg-dark")
+        div(class="cover-container d-flex flex-column p-2 mx-auto mt-3 w-75")
+            div(class="container-fluid mt-5")
+                div(class="row justify-content-center")
+                    div(class="card bg-dark text-light mx-auto")
+                        h1(class="card-header") Setup Complete
+                        div(class="card-body")
+                            div(class="row")
+                                div(class="col-12")
+                                    p(class="card-text") The setup process has been completed.
+                                    | Once you press the complete button, the setup lock will be enabled and you will be redirected to the index page.
+                                    | The setup lock will prevent the setup pages from being accessed again.
+                                div(class="col-12 mt-3")
+                                    a(id="btn-complete" class="btn btn-primary") Complete
