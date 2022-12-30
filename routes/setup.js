@@ -55,6 +55,90 @@ router.post("/step/1", body('dbhost').not().isEmpty().trim().escape(), body('dbu
     });
 });
 /***
+ * Step 2: Configuration setup
+ * @param {string} email
+ * @param {string} salt
+ * @param {boolean} minify
+ * @param {string} logo
+ * @param {string} favicon
+ * @param {string} title
+ * @param {string} description
+ * @param {string} keywords
+ * @param {string} author
+ * @param {string} contactemail
+ * @param {boolean} registration
+ * @param {boolean} emailVerfication
+ * @param {boolean} invites
+ * @param {number} minPasswordLength
+ * @param {boolean} motd
+ * @param {string} motdMessage
+ * @return {json} status
+ */
+router.post("/step/2",
+    body('email').not().isEmpty().trim(),
+    body('salt').not().isEmpty().trim(),
+    body('minify').not().isEmpty().isBoolean(),
+    body('logo').not().isEmpty().trim(),
+    body('favicon').not().isEmpty().trim(),
+    body('title').not().isEmpty().trim(),
+    body('description').not().isEmpty().trim(),
+    body('keywords').not().isEmpty().trim(),
+    body('author').not().isEmpty().trim(),
+    body('contactemail').not().isEmpty().trim(),
+    body('registration').not().isEmpty().isBoolean(),
+    body('emailVerfication').not().isEmpty().isBoolean(),
+    body('invites').not().isEmpty().isBoolean(),
+    body('minPasswordLength').not().isEmpty().trim(),
+    body('motd').not().isEmpty().isBoolean(),
+    body('motdMessage').not().isEmpty().trim(),
+    function(req, res) {
+        config.server.email = req.body.email;
+        config.server.salt = req.body.salt;
+        if(config.server.salt === "") { //Generate random salt if none is provided
+            config.server.salt = crypto.randomBytes(64).toString('hex').substring(0, 64);
+        }
+        if(req.body.minify === "true") {
+            config.server.minify = true;
+        } else {
+            config.server.minify = false;
+        }
+        config.branding.logo = req.body.logo;
+        config.branding.favicon = req.body.favicon;
+        config.branding.title = req.body.title;
+        config.branding.description = req.body.description;
+        config.branding.keywords = req.body.keywords;
+        config.branding.author = req.body.author;
+        config.branding.contactemail = req.body.contactemail;
+        if(req.body.registration === "true") {
+            config.accounts.registration.enabled = true;
+        } else {
+            config.accounts.registration.enabled = false;
+        }
+        if(req.body.emailVerfication === "true") {
+            config.accounts.registration.emailVerification = true;
+        } else {
+            config.accounts.registration.emailVerification = false;
+        }
+        if(req.body.invites === "true") {
+            config.accounts.registration.invites = true;
+        } else {
+            config.accounts.registration.invites = false;
+        }
+        config.accounts.registration.minPasswordLength = parseInt(req.body.minPasswordLength);
+        if(req.body.motd === "true") {
+            config.server.motd = true;
+        } else {
+            config.server.motd = false;
+        }
+        config.motd.message = req.body.motdMessage;
+        fs.writeFile('./config/config.json', JSON.stringify(config, null, 4), function (err) { //Write config to config.json
+            if (err) {
+                return res.status(400).json({error: err});
+            }
+            return res.status(200).json({success: true});
+        });
+    });
+/***
  * Step 3: Admin account setup
  * @param {string} username
  * @param {string} password

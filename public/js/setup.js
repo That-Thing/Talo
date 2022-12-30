@@ -43,7 +43,7 @@ $(function () {
         }).done(function (data) {
             toastr.success("Configuration saved");
             setTimeout(function () {
-                window.location.href = "/setup/step/5";
+                window.location.href = "/setup/step/3";
             }, 2000);
         }).fail(function (data) {
             toastr.error(data.responseJSON.error);

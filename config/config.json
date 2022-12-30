@@ -4,10 +4,13 @@
         "port": 3000,
         "dev": true,
         "adminEmail": "admin@localhost",
-        "salt": "changeme"
+        "salt": "changeme",
+        "email": "admin@localhost",
+        "minify": false,
+        "motd": true
     },
     "web": {
-        "minify": true
+        "minify": false
     },
     "database": {
         "host": "localhost",
@@ -23,13 +26,14 @@
         "description": "Haud nomine tantum",
         "keywords": "talo, interesting, project",
         "author": "Interesting Project",
-        "contactEmail": "contact@localhost"
+        "contactEmail": "contact@localhost",
+        "contactemail": "contact@localhost"
     },
     "accounts": {
         "registration": {
             "enabled": true,
             "emailVerification": false,
-            "minPasswordLength": 6,
+            "minPasswordLength": 12,
             "invites": false
         }
     },
