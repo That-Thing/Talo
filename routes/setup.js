@@ -171,7 +171,12 @@ router.post("/step/3", body('username').not().isEmpty().trim().escape(), body('p
         if (err) {
             return res.status(400).json({error: err.sqlMessage});
         }
-        return res.status(200).json({success: true});
+        connection.query(`UPDATE accounts SET id=0 WHERE id=1`, function (err, result) { //Set root account id to 0
+            if (err) {
+                return res.status(400).json({error: err.sqlMessage});
+            }
+            return res.status(200).json({success: true});
+        });
     });
 });
 /***
