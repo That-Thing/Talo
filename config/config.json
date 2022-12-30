@@ -4,7 +4,7 @@
         "port": 3000,
         "dev": true,
         "adminEmail": "admin@localhost",
-        "salt": "kvn2b7i8chq4w8oh2zru6w",
+        "salt": "changeme",
         "email": "admin@localhost",
         "minify": true,
         "motd": true

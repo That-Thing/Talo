@@ -1,5 +1,5 @@
 $(function () {
-    $("#btnInit").click(function () {
+    $("#btn-database-init").click(function () {
         $.ajax({
             url: "/setup/step/1",
             type: "POST",
@@ -13,12 +13,12 @@ $(function () {
             toastr.success("Database initialized");
             setTimeout(function () {
                 window.location.href = "/setup/step/2";
-            }, 2000);
+            }, 1000);
         }).fail(function (data) {
             toastr.error(responseJSON.error);
         });
     });
-    $("#config-submit").click(function () {
+    $("#btn-config-submit").click(function () {
         $.ajax({
             url: "/setup/step/2",
             type: "POST",
@@ -44,12 +44,12 @@ $(function () {
             toastr.success("Configuration saved");
             setTimeout(function () {
                 window.location.href = "/setup/step/3";
-            }, 2000);
+            }, 1000);
         }).fail(function (data) {
             toastr.error(data.responseJSON.error);
         });
     });
-    $("#register").click(function () {
+    $("#btn-register").click(function () {
         $.ajax({
             url: "/setup/step/3",
             type: "POST",
@@ -62,7 +62,7 @@ $(function () {
             toastr.success("Account created");
             setTimeout(function () {
                 window.location.href = "/setup/step/4";
-            }, 2000);
+            }, 1000);
         }).fail(function (data) {
             console.log(data);
             toastr.error(data.responseJSON.error);
@@ -71,5 +71,18 @@ $(function () {
     $("#generate-salt").click(function () {
         var salt = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
         $("#salt").val(salt);
+    })
+    $("#btn-complete").click(function () {
+        $.ajax({
+            url: "/setup/step/4",
+            type: "POST"
+        }).done(function (data) {
+            toastr.success("Setup complete");
+            setTimeout(function () {
+                window.location.href = "/";
+            }, 1000);
+        }).fail(function (data) {
+            toastr.error(data.responseJSON.error);
+        });
     });
 });

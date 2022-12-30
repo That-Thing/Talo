@@ -167,11 +167,25 @@ router.post("/step/3", body('username').not().isEmpty().trim().escape(), body('p
     if(/^[a-zA-Z0-9]+$/.test(username) === false) { //Check for invalid characters in username
         return res.status(400).json({ status: errors.auth.invalidUsernameCharacters });
     }
-    connection.query(`INSERT INTO accounts (group, username, password, token, date, ip) VALUES (3, '${username}', '${password}', '${token}', ${date}, '${ip}')`, function (err, result) {
+    connection.query(`INSERT INTO accounts (\`group\`, username, password, token, date, ip) VALUES (3, '${username}', '${password}', '${token}', ${date}, '${ip}')`, function (err, result) {
         if (err) {
             return res.status(400).json({error: err.sqlMessage});
         }
         return res.status(200).json({success: true});
+    });
+});
+/***
+ * Step 4: Finish setup
+ * @return {json} status
+ */
+router.post("/step/4", function(req, res) {
+    config.server.setupLock = true;
+    fs.writeFile('./config/config.json', JSON.stringify(config, null, 4), function (err) { //Write setup to setup.json
+        if (err) {
+            return res.status(400).json({error: err});
+        }
+        return res.status(200).json({success: true});
+        process.exit(1);
     });
 });
 
