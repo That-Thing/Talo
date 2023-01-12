@@ -29,20 +29,15 @@ router.post("/:id", body('key').optional({checkFalsy: true}).trim().escape(), bo
             if (error) {
                 return res.status(400).json({ error: error });
             }
-            keyQuery = result;
         });
+        console.log(keyQuery);
         if (keyQuery.length === 0) { //No key found
             return res.status(400).json({ error: errors.api.invalidKey });
         }
         keyPerms = keyQuery[0].perms; //Get key permissions
     }
     if(token !== undefined) { //Token is provided
-        let tokenQuery = await connection.query(`SELECT * FROM accounts WHERE token = '${token}'`, function (error, result) {
-            if (error) {
-                return res.status(400).json({ error: error });
-            }
-            tokenQuery = result;
-        });
+        const tokenQuery = await connection.query(`SELECT * FROM accounts WHERE token='${token}'`);
         if (tokenQuery.length === 0) { //No token found
             return res.status(400).json({ error: errors.auth.invalidToken });
         }

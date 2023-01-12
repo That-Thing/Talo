@@ -160,8 +160,8 @@ router.post("/step/3", body('username').not().isEmpty().trim().escape(), body('p
         database: config.database.name
     });
     let username = req.body.username;
-    let password = crypto.createHash('sha256').update(req.body.password+config.server.salt).digest('base64'); //Hash password
-    let token = crypto.createHash('sha256').update(username+password+config.server.salt).digest('base64'); //Create user token
+    let password = crypto.createHash('sha256').update(req.body.password+config.server.salt).digest('base64').replace(/[&\/\\#,+()$~%.'":*?<>{}]/g, ''); //Hash password
+    let token = crypto.createHash('sha256').update(username+password+config.server.salt).digest('base64').replace(/[&\/\\#,+()$~%.'":*?<>{}]/g, ''); //Create user token
     let ip = (req.headers['x-forwarded-for'] || req.socket.remoteAddress || '').split(',')[0].trim();
     let date = Date.now();
     if(/^[a-zA-Z0-9]+$/.test(username) === false) { //Check for invalid characters in username

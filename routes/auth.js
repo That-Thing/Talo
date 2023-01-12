@@ -79,8 +79,9 @@ router.post('/register', body('username').not().isEmpty().trim().escape(), body(
     if(password.length < config.accounts.registration.minPasswordLength) { //Check if password is too short
         return res.status(400).json({ status: errors.auth.invalidPasswordLength });
     }
-    password = crypto.createHash('sha256').update(req.body.password+config.server.salt).digest('base64'); //Hash password
-    let token = crypto.createHash('sha256').update(username+password+config.server.salt).digest('base64'); //Create user token
+    password = crypto.createHash('sha256').update(req.body.password+config.server.salt).digest('base64').replace(/[&\/\\#,+()$~%.'":*?<>{}]/g, ''); //Hash password
+    let token = crypto.createHash('sha256').update(username+password+config.server.salt).digest('base64').replace(/[&\/\\#,+()$~%.'":*?<>{}]/g, ''); //Create user token
+    //
     connection.query(`SELECT * FROM accounts WHERE username = '${username}'`, function (error, result) {
         if (error) throw error;
         if (result.length > 0) { //Account already exists
