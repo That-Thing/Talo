@@ -23,6 +23,15 @@ CREATE TABLE IF NOT EXISTS `accounts` (
     PRIMARY KEY (`id`)
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+CREATE TABLE IF NOT EXISTS `api_keys` (
+                                          `key` text NOT NULL COMMENT 'Randomly Generated API key',
+                                          `owner` int(11) NOT NULL DEFAULT 0 COMMENT 'Owner ID',
+    `perms` int(11) NOT NULL DEFAULT 0 COMMENT 'Permission level',
+    `expire` bigint(20) DEFAULT NULL COMMENT 'Expiration date. Null if infinite.',
+    `name` text NOT NULL COMMENT 'Name for API key',
+    `Description` mediumtext DEFAULT NULL COMMENT 'Description for API key'
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='Keys to access the Talo API';
+
 CREATE TABLE IF NOT EXISTS `invites` (
                                          `invite` text NOT NULL COMMENT 'Invite text',
                                          `creator` int(11) NOT NULL COMMENT 'Invite creator',
