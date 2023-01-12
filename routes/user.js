@@ -13,7 +13,11 @@ const errors = require('../modules/errors');
  * @param {string} token - User Token
  * @returns {json} user information
  */
-router.post("/:id", body('key').optional({checkFalsy: true}).trim().escape(), body('token').optional({checkFalsy: true}).escape().trim(), async function(req, res, next) {
+router.get("/:id", body('key').optional({checkFalsy: true}).trim().escape(), body('token').optional({checkFalsy: true}).escape().trim(), async function(req, res, next) {
+    const errs = validationResult(req);
+    if (!errs.isEmpty()) {
+        return res.status(400).json({ error: errs.array() });
+    }
     let id = req.params.id;
     let key = req.body.key;
     let token = req.body.token;
@@ -22,13 +26,12 @@ router.post("/:id", body('key').optional({checkFalsy: true}).trim().escape(), bo
     if(key === undefined && token === undefined) { //No key or token provided
         return res.status(400).json({error: errors.user.noAuth});
     }
-    console.log("Key: " + key);
-    console.log("Token: " + token);
     if(key !== undefined) { //Key is provided
-        let keyQuery = await connection.query(`SELECT * FROM api_keys WHERE \`key\` = '${key}'`, function (error, result) {
-            if (error) {
-                return res.status(400).json({ error: error });
-            }
+        const keyQuery = await new Promise((resolve, reject) => {
+            connection.query(`SELECT * FROM api_keys WHERE key = '${key}'`, function (error, result) {
+                if (error) throw error;
+                return resolve(result);
+            });
         });
         console.log(keyQuery);
         if (keyQuery.length === 0) { //No key found
@@ -37,11 +40,16 @@ router.post("/:id", body('key').optional({checkFalsy: true}).trim().escape(), bo
         keyPerms = keyQuery[0].perms; //Get key permissions
     }
     if(token !== undefined) { //Token is provided
-        const tokenQuery = await connection.query(`SELECT * FROM accounts WHERE token='${token}'`);
+        //Async mysql query to get user information from provided token.
+        const tokenQuery = await new Promise((resolve, reject) => {
+            connection.query(`SELECT * FROM accounts WHERE token = '${token}'`, function (error, result) {
+                if (error) return reject(error);
+                return resolve(result);
+            });
+        });
         if (tokenQuery.length === 0) { //No token found
             return res.status(400).json({ error: errors.auth.invalidToken });
         }
-        console.log(tokenQuery);
         userPerms = tokenQuery[0].group; //Get user permissions
     }
     connection.query(`SELECT * FROM accounts WHERE id = '${id}'`, function (error, result) {
