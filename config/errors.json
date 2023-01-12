@@ -18,5 +18,13 @@
         "registrationDisabled": "Registration is disabled",
         "usernameTaken": "Username already taken",
         "emailTaken": "Email taken"
+    },
+    "api": {
+        "invalidKey": "Invalid API key"
+    },
+    "user": {
+        "invalidID": "Invalid user ID",
+        "noAuth": "No authentication was provided",
+        "invalidToken": "Invalid token"
     }
 }
