@@ -10,7 +10,6 @@ router.use(function(req, res, next) { //Middleware to check if user is logged in
     }
     req.session.path = url.parse(req.url).path; //Set path to current path
     next();
-    console.log(req.session.group);
 });
 
 router.get("/", function(req, res) {

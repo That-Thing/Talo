@@ -1,0 +1,21 @@
+html
+    head
+        title User Settings
+        include includes/head.pug
+    body(class="d-flex text-bg-dark bg-dark")
+        div(class="cover-container d-flex flex-column p-2 mx-auto mt-3 w-75")
+            div(class="container-fluid mt-5")
+                div(class="row")
+                    div(class="col-12")
+                        h1(class="text-center") User Settings
+                        div(class="row")
+                            div(class="col-lg")
+                                div(class="row mb-3")
+                                    label(for="password" class="col-sm-2 col-form-label") Password
+                                    div(class="col-sm-3")
+                                        input(type="password" class="form-control bg-dark text-light" id="password" placeholder="Password")
+                                div(class="row mb-3")
+                                    label(for="password" class="col-sm-2 col-form-label") Confirm Password
+                                    div(class="col-sm-3")
+                                        input(type="confirm-password" class="form-control bg-dark text-light" id="confirm-password" placeholder="Same Password")
+                            div(class="col-lg")

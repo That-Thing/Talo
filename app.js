@@ -13,6 +13,7 @@ if(config.server.setupLock == true) { //Only allow setup if setupLock is disable
     var authRouter = require('./routes/auth');
     var dashboardRouter = require('./routes/dashboard');
     var userRouter = require('./routes/user');
+    var settingsRouter = require('./routes/settings');
 } else {
     var setupRouter = require('./routes/setup');
 }
@@ -58,6 +59,7 @@ if(config.server.setupLock === true) {
   app.use('/auth', authRouter);
   app.use('/dashboard', dashboardRouter);
   app.use('/user', userRouter);
+  app.use('/settings', settingsRouter);
 } else {
   app.use('/setup', setupRouter);
 }
