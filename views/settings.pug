@@ -11,16 +11,25 @@ html
                         h1(class="text-center") User Settings
                         div(class="row mx-auto")
                             div(class="col-lg")
+                                h4 Account settings
                                 div(class="row mb-3")
                                     label(for="password" class="col-sm-2 col-form-label") Password
                                     div(class="col-sm-4 my-auto")
                                         input(type="password" class="form-control bg-dark text-light" id="password" placeholder="Password")
                                 div(class="row mb-3")
-                                    label(for="password" class="col-sm-2 col-form-label") Confirm Password
+                                    label(for="confirm-password" class="col-sm-2 col-form-label") Confirm Password
                                     div(class="col-sm-4 my-auto")
                                         input(type="confirm-password" class="form-control bg-dark text-light" id="confirm-password" placeholder="Confirm Password")
                                 div(class="row mb-3")
-                                    label(for="password" class="col-sm-2 col-form-label") Email
+                                    label(for="email" class="col-sm-2 col-form-label") Email
                                     div(class="col-sm-4 my-auto")
                                         input(type="email" class="form-control bg-dark text-light" id="email" placeholder="example@domain.tld" value=user.email)
                             div(class="col-lg")
+                                h4 Privacy settings
+                                div(class="row mb-3")
+                                    label(for="email-updates" class="col-sm-2 col-form-label") Receive Updates
+                                    div(class="col-sm-4 my-auto form-check form-switch")
+                                        input(type="checkbox" class="form-check-input" id="email-updates" checked=user.emailUpdates)
+                        div(class="row mx-auto")
+                            div(class="col-lg d-flex")
+                                button(type="button" class="btn btn-primary mx-auto" id="save-settings") Save Settings
