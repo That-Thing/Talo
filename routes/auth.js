@@ -39,7 +39,11 @@ router.post('/login', body('username').not().isEmpty().trim().escape(), body('pa
                 req.session.username = result[0].username;
                 req.session.loggedIn = true;
                 req.session.group = result[0].group;
-                return res.status(200).json({status: true});
+                var ip = (req.headers['x-forwarded-for'] || req.socket.remoteAddress || '').split(',')[0].trim();
+                connection.query(`UPDATE accounts SET last_login = '${ip}' WHERE id = '${req.session.user}'`, function (error, result) { //Update last login
+                    if (error) return res.status(400).json({error: error});
+                    return res.status(200).json({status: true});
+                });
             } else { //Password doesn't match
                 return res.status(400).json({ status: errors.auth.invalidPassword });
             }            
@@ -94,7 +98,7 @@ router.post('/register', body('username').not().isEmpty().trim().escape(), body(
                     if (result.length == 0) { //Invite doesn't exist
                         return res.status(400).json({ status: errors.auth.invalidInvite });
                     }
-                    connection.query(`INSERT INTO accounts (username, password, invite, token, date, ip) VALUES ('${username}', '${password}', '${invite}', '${token}', ${date}, '${ip}')`, function (error, result) {
+                    connection.query(`INSERT INTO accounts (username, password, invite, token, date, ip, last_login) VALUES ('${username}', '${password}', '${invite}', '${token}', ${date}, '${ip}', '${ip}')`, function (error, result) {
                         if (error) throw error;
                         connection.query(`UPDATE invites SET uses = uses + 1 WHERE invite = '${invite}'`, function (error, result) { //Update invite uses
                             if (error) throw error;

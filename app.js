@@ -24,7 +24,6 @@ app.use(session({
 	resave: true,
 	saveUninitialized: true
 }));
-
 // Session middleware
 function setSession (req, res, next) { 
   if (!req.session.loggedIn) {

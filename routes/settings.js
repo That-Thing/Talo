@@ -6,14 +6,20 @@ const { body, validationResult } = require('express-validator');
 const config = require('../modules/config');
 const errors = require('../modules/errors');
 const crypto = require("crypto");
-
-
-
+const url = require("url");
+router.use(function(req, res, next) {
+    req.session.path = url.parse(req.url).path;
+    next();
+});
 router.get('/', function(req, res, next) {
     if (!req.session.loggedIn) {
         return res.redirect('/auth/login');
     }
-    res.render('settings', {config: config, session: req.session});
+    connection.query(`SELECT * FROM accounts WHERE id = '${req.session.user}'`, function (error, result) { //Get user data
+        if (error) throw error;
+        let user = result[0];
+        res.render('settings', {config: config, session: req.session, user: user});
+    });
 });
 
 
