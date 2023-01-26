@@ -15,7 +15,7 @@ $(function () {
                 window.location.href = "/setup/step/2";
             }, 1000);
         }).fail(function (data) {
-            toastr.error(responseJSON.error);
+            toastr.error(data.responseJSON.error);
         });
     });
     $("#btn-config-submit").click(function () {

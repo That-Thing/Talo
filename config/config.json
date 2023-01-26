@@ -4,7 +4,7 @@
         "port": 3000,
         "dev": true,
         "adminEmail": "admin@localhost",
-        "salt": "7be6faa8b82a87bffbcc2f9bf303ad61cde4604bb96347e3015611143e37f09f",
+        "salt": "changeme",
         "email": "admin@localhost",
         "minify": true,
         "motd": true
@@ -33,7 +33,7 @@
         "registration": {
             "enabled": true,
             "emailVerification": false,
-            "minPasswordLength": 12,
+            "minPasswordLength": 4,
             "invites": false
         }
     },

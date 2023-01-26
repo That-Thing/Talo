@@ -26,7 +26,12 @@ router.get("/step/:step", function(req, res) {
  * @param {string} dbpass
  * @return {json} status
  */
-router.post("/step/1", body('dbhost').not().isEmpty().trim().escape(), body('dbuser').not().isEmpty().trim().escape(), body('dbpassword').not().isEmpty().trim().escape(), function(req, res) {
+router.post("/step/1",
+    body('dbhost').not().isEmpty().trim().escape(),
+    body('dbuser').not().isEmpty().trim().escape(),
+    body('dbpassword').not().isEmpty().trim().escape(),
+    function(req, res) {
+    console.log("test");
     let connection = mysql.createConnection({ //Create connection to database using provided credentials
         host: req.body.dbhost,
         user: req.body.dbuser,
