@@ -28,7 +28,6 @@ router.post('/login', body('username').not().isEmpty().trim().escape(), body('pa
     }
     var username = req.body.username;
     var password = crypto.createHash('sha256').update(req.body.password+config.server.salt).digest('base64').replace(/[&\/\\#,+()$~%.'":*?<>{}]/g, '');
-    console.log(password);
     connection.query(`SELECT * FROM accounts WHERE username = '${username}'`, function (error, result) {
         if (error) throw error;
         if (result.length == 0) { //No account found
